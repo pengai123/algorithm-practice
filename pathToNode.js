@@ -5,12 +5,15 @@ class binaryTree {
     this.right = null;
   }
 }
-
+//         1
+//      2    3
+//    4  5  6  7
+//         8
 // find the path of a node in binary tree
 
 function pathToNode(root, val) {
   let path = [];
-  function appendPath(rt) {
+  function helper(rt) {
     //root is null
     if (rt === null) {
       return false;
@@ -20,15 +23,14 @@ function pathToNode(root, val) {
     if (rt.value === val) {
       return true;
     }
-
-    if (appendPath(rt.left) || appendPath(rt.right)) {
+    if (helper(rt.left) || helper(rt.right)) {
       return true;
     } else {
       path.pop();
       return false;
     }
   }
-  appendPath(root);
+  helper(root);
   return path;
 }
 
@@ -41,5 +43,5 @@ root1.right.right = new binaryTree(7)
 root1.right.left = new binaryTree(6)
 root1.left.right = new binaryTree(5)
 root1.right.left.right = new binaryTree(8)
-
-console.log(pathToNode(root1, 5))
+console.log('root1:', root1)
+console.log(pathToNode(root1, 4))
